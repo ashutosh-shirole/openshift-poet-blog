@@ -135,7 +135,7 @@ var SampleApp = function() {
         self.createRoutes();
         self.app = express();
         
-        var poet = Poet(app, {
+        var poet = Poet(self.app, {
         	  postsPerPage: 5,
         	  posts: __dirname + '/_posts',
         	  metaFormat: 'json',
