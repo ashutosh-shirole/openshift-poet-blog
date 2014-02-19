@@ -150,12 +150,7 @@ var SampleApp = function() {
         self.app.use(handle404);
 
         require('./routes')(self.app);
-        console.log('routes set');
-        self.app.configure(function () {
-        	self.app.use(express.bodyParser());
-        	self.app.use(express.methodOverride());
-        	self.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-        });
+        console.log('routes set');       
     };
 
 
