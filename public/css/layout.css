@@ -311,7 +311,7 @@ div.post p {
   font-size: 110%;
 }
 span.date {
-  position: absolute;
+  /*position: absolute;*/
   top: 35px;
   left: 0;
 }
