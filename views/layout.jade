@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    //- Output page title
+    - if (typeof post !== "undefined" && post.title !== "undefined")
+      title= post.title + " * Ashutosh"
+      meta(name='description', content=post.description)
+    - else if (typeof tag !== "undefined")
+      title= tag + " * Ashutosh"
+      meta(name='description', content='Ashutosh, posts tagged with #{tag}')
+    - else if (typeof category !== "undefined")
+      title= category + " * Ashutosh"
+      meta(name='description', content='Ashutosh, posts of category #{category}')
+    - else if (typeof title !== "undefined" )
+      title= title
+      meta(name='description', content='Ashutosh')
+    - else
+      title= 'Ashutosh'
+      meta(name='description', content='Ashutosh')
+
+    meta(charset='utf-8')
+    link(rel='icon', type='image/png', href='/favicon.png')
+   	link(rel='stylesheet', href='/css/layout.css')
+   	link(rel='stylesheet', href='/css/normalize.css')
+   	link(rel='stylesheet', href='/css/prettify.css')
+  body
+    .wrap
+      .container
+        .content
+          block content
+        .sidebar
+
+          h2.name
+            a(href='/') Ashutosh
+          h3.categories
+            a(href='/categories') Categories
+          ul
+            - each cat in getCategories()
+              li
+                a(href=categoryURL(cat)) #{cat}
+          h3.tags
+            a(href='/tags') tags
+          ul
+            - each tag in getTags()
+              li
+                a(href=tagURL(tag)) #{tag}
+        .clear
+    .footer
+      .container
+        .span
+          h3 who is this
+          include includes/social
+        .clear
+  script(src='/js/jquery.js')
+  script(src='/js/jquery.sharrre.js')
+  script(src='/js/jquery.tweet.js')
+  script(src='/js/prettify.js')
+  script(src='/js/ui.js')
