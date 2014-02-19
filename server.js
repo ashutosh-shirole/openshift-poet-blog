@@ -2,7 +2,8 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
-
+var Poet = require('poet');
+var handle404 = require('./lib/handle-404');
 
 /**
  *  Define the sample application.
@@ -22,8 +23,8 @@ var SampleApp = function() {
      */
     self.setupVariables = function() {
         //  Set the environment variables we need.
-        self.ipaddress = process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP;
-        self.port      = process.env.OPENSHIFT_INTERNAL_PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+        self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
+        self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
         if (typeof self.ipaddress === "undefined") {
             //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
@@ -132,12 +133,29 @@ var SampleApp = function() {
      */
     self.initializeServer = function() {
         self.createRoutes();
-        self.app = express.createServer();
+        self.app = express();
+        
+        var poet = Poet(app, {
+        	  postsPerPage: 5,
+        	  posts: __dirname + '/_posts',
+        	  metaFormat: 'json',
+        	});
 
-        //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
-        }
+        poet.watch().init();
+
+        self.app.set('views', __dirname + '/views');
+        self.app.set('view engine', 'jade');
+        self.app.use(express.static(__dirname + '/public'));
+        self.app.use(self.app.router);
+        self.app.use(handle404);
+
+        require('./routes')(self.app);
+        
+        self.app.configure(function () {
+        	self.app.use(express.bodyParser());
+        	self.app.use(express.methodOverride());
+        	self.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+        });
     };
 
 

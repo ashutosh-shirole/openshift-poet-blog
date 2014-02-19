@@ -1,16 +1,16 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "Ashutosh blog",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "blog using poet",
   "keywords": [
-    "OpenShift",
+    "ashutosh",
     "Node.js",
     "application",
-    "openshift"
+    "poet"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
+    "name": "Ashutosh",
+    "email": "ashutosh@example.org",
     "url":  "http://openshift.redhat.com/"
   },
   "homepage": "http://openshift.redhat.com/",
@@ -25,7 +25,13 @@
   },
 
   "dependencies": {
-    "express": "*"
+    "express": "*",
+    "jade": ">=1.1.5",
+    "poet": ">=1.0.0rc3",
+    "request": ">= 2.16.6",
+    "html-to-text": ">= *",
+    "underscore": ">= *",
+    "async": ">= *"
   },
   "devDependencies": {},
   "bundleDependencies": [],
