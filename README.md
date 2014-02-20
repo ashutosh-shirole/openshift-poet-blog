@@ -1,19 +1,6 @@
 Creating free personal blog website
 ===================================
 
-{{{
-  "title" : "Creating blog based website using openshift and node.js",
-  "tags" : [ "node.js", "poet", "openshift" ],
-  "category" : "web",
-  "date" : "02-20-2014",
-  "description" : "Step by step guid to create blog on openshift"
-}}}
-
-This blog describes step by step creation of blog styled website on openshift using node.js viz. poet, jade, markdown module.
-
-<!--more-->
-
-
 # Basic setup
 
 ## Requirements
@@ -130,7 +117,7 @@ Change <pre>self.initializeServer</pre> method as follows so that it configures 
     };
 </pre>
 
-4.routes.js
+4. routes.js
 Add following routes in `routes.js` file
 
 <pre>
