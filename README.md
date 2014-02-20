@@ -43,7 +43,8 @@ In this marker file change version to `0.9.1`.
 ## Changing default app to blog app
 
 We will be configuring the app to use [Poet](https://github.com/jsantell/poet), [Jade](https://github.com/visionmedia/jade). 
-1. package.json
+
+	1. package.json
 Change the `package.json` file to have following dependencies.
 
 <pre>
@@ -60,7 +61,7 @@ Change the `package.json` file to have following dependencies.
 
 Also you can change the `name`, `author-name` etc. in the same file.
 
-2. Create files and folders as described below
+	2. Create files and folders as described below
 
 <pre>
 blog
@@ -78,7 +79,7 @@ blog
   |--routes.js
 </pre>
 
-3. server.js
+	3. server.js
 
 Add following line
 
@@ -117,7 +118,7 @@ Change <pre>self.initializeServer</pre> method as follows so that it configures 
     };
 </pre>
 
-4. routes.js
+	4. routes.js
 Add following routes in `routes.js` file
 
 <pre>
@@ -138,7 +139,7 @@ Add following routes in `routes.js` file
 };
 </pre>
 
-5. views/index.jade
+	5. views/index.jade
 
 This file will display the posts present in `_posts` folder. These posts will be constructed in [markdown](http://daringfireball.net/projects/markdown/) format prefixed by front matter via YAML or [JSON](https://github.com/jsantell/node-json-front-matter).
 
@@ -175,7 +176,7 @@ html
 
 </pre>
 
-6. views/categories.jade
+	6. views/categories.jade
 
 This file displays the list of categories. The markup in this file would be as:
 
