@@ -39,6 +39,7 @@ After running `rhc setup` command enter your openshift account username and pass
 ## Create the node app
 
 If we create the app using instructions provided on openshift website we are restricted to use node.js version 0.6 or 0.10. To create app of a custom version of node.js follow steps provided by [Grant Shipley](https://www.openshift.com/blogs/any-version-of-nodejs-you-want-in-the-cloud-openshift-does-it-paas-style). I'll summarize them
+
 <pre>
 	$ rhc app create blog nodejs-0.6
 	$ cd blog
@@ -46,6 +47,7 @@ If we create the app using instructions provided on openshift website we are res
 	$ git pull -s recursive -X theirs upstream master
 	$ nano .openshift/markers/NODEJS_VERSION
 </pre>
+
 In this marker file change version to `0.9.1`.
 
 ## Changing default app to blog app
@@ -53,6 +55,7 @@ In this marker file change version to `0.9.1`.
 We will be configuring the app to use [Poet](https://github.com/jsantell/poet), [Jade](https://github.com/visionmedia/jade). 
 1. package.json
 Change the `package.json` file to have following dependencies.
+
 <pre>
 	"dependencies": {
 	    "express": "*",
@@ -64,9 +67,12 @@ Change the `package.json` file to have following dependencies.
 	    "async": ">= *"
 	  }
 </pre>
+
 Also you can change the `name`, `author-name` etc. in the same file.
 
 2. Create files and folders as described below
+
+<pre>
 blog
   |-->_posts
   		|--first.md	
@@ -80,20 +86,24 @@ blog
   |--server.js
   |--package.json
   |--routes.js
+</pre>
 
 3. server.js
 
 Add following line
+
 <pre>
 	var Poet = require('poet');
 </pre>
 
 after
+
 <pre>
 	var fs = require('fs');
 </pre>
 
 Change <pre>self.initializeServer</pre> method as follows so that it configures the app to use 'poet' and 'jade'
+
 <pre>
 	self.initializeServer = function() {
         self.createRoutes();
@@ -119,6 +129,7 @@ Change <pre>self.initializeServer</pre> method as follows so that it configures 
 
 4.routes.js
 Add following routes in `routes.js` file
+
 <pre>
 	module.exports = function(app) {
 
@@ -142,6 +153,7 @@ Add following routes in `routes.js` file
 This file will display the posts present in `_posts` folder. These posts will be constructed in [markdown](http://daringfireball.net/projects/markdown/) format prefixed by front matter via YAML or [JSON](https://github.com/jsantell/node-json-front-matter).
 
 The contents of `index.jade` will be as follows
+
 <pre>
 doctype html
 html
@@ -224,6 +236,7 @@ You can also register for free domains (as I have my own.. This ones free !!!) G
 
 Openshift also allows you to change/redirect/forward from your domain `www.myexample.com` to the one you created `blog-{yourNamespace}.rhcloud.com`.
 All you have to do is from your domain forward it to `http://blog-{yourNamespace}.rhcloud.com` and run the following command on your console.
+
 <pre>
 	$ rhc alias add blog www.myexample.com
 </pre>
